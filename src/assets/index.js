@@ -1,0 +1,9 @@
+export { ReactComponent as LogoIcon } from '@assets/icons/logo.svg';
+export { ReactComponent as LocationIcon } from '@assets/icons/location.svg';
+export { ReactComponent as GearIcon } from '@assets/icons/gear.svg';
+export { ReactComponent as FuelPumpIcon } from '@assets/icons/fuel-pump.svg';
+export { ReactComponent as CheckCircle } from '@assets/icons/check-circle.svg';
+export { ReactComponent as CarIcon } from '@assets/icons/car.svg';
+export { ReactComponent as CalendarIcon } from '@assets/icons/calendar.svg';
+export { ReactComponent as ArrowUpIcon } from '@assets/icons/arrow-up.svg';
+export { ReactComponent as ArrowDownIcon } from '@assets/icons/arrow-down.svg';

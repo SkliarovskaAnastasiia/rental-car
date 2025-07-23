@@ -1,5 +1,23 @@
+import { lazy } from "react";
+import { Route, Routes } from "react-router";
+import { Layout } from "@components";
+
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage"));
+const CarPage = lazy(() => import("./pages/CarPage/CarPage"));
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/catalog/:id" element={<CarPage />} />
+        </Routes>
+      </Layout>
+    </>
+  );
 }
 
 export default App;
