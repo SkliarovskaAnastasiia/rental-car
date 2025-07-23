@@ -7,3 +7,5 @@ export { ReactComponent as CarIcon } from '@assets/icons/car.svg';
 export { ReactComponent as CalendarIcon } from '@assets/icons/calendar.svg';
 export { ReactComponent as ArrowUpIcon } from '@assets/icons/arrow-up.svg';
 export { ReactComponent as ArrowDownIcon } from '@assets/icons/arrow-down.svg';
+export { ReactComponent as SavedIcon } from '@assets/icons/saved.svg';
+export { ReactComponent as UnsavedIcon } from '@assets/icons/unsaved.svg';
