@@ -1,17 +1,22 @@
+import { useField, useFormikContext } from 'formik';
 import { palette } from '../../theme/palette';
 import { InputAdornment, Stack, TextField } from '@mui/material';
 
-export const CustomRangeInput = ({ from, to, onChange }) => {
+export const CustomRangeInput = ({ fromName, toName }) => {
+  const [fromField] = useField(fromName);
+  const [toField] = useField(toName);
+  const { setFieldValue } = useFormikContext();
+
   const inputStyles = {
     '& .MuiInputBase-root': {
       backgroundColor: palette.white[100],
-      fontFamily: 'inherit',
-      fontWeight: 500,
       fontSize: '16px',
+      fontWeight: 500,
       lineHeight: '1.25',
       color: palette.black.main,
       height: '44px',
       padding: '12px 24px',
+      borderRadius: 'inherit',
     },
 
     '& .MuiInputBase-input': {
@@ -32,26 +37,20 @@ export const CustomRangeInput = ({ from, to, onChange }) => {
 
   const adormentStyles = {
     '& .MuiTypography-root': {
-      fontFamily: 'inherit',
-      fontWeight: 500,
       fontSize: '16px',
+      fontWeight: 500,
       lineHeight: '1.25',
       color: palette.black.main,
     },
   };
 
-  const handleChange = (e, name) => {
-    const price = e.target.value.trim();
-    onChange(name, price);
-  };
-
   return (
     <Stack sx={{ width: '320px', flexDirection: 'row' }}>
       <TextField
+        {...fromField}
         type="number"
-        name="from"
-        value={from}
-        onChange={(e) => handleChange(e, 'from')}
+        value={fromField.value || ''}
+        onChange={e => setFieldValue(fromName, e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start" sx={adormentStyles}>
@@ -61,15 +60,16 @@ export const CustomRangeInput = ({ from, to, onChange }) => {
         }}
         sx={{
           ...inputStyles,
+          maxHeight: '44px',
           borderRadius: '12px 0 0 12px',
           borderRight: `1px solid ${palette.white[300]}`,
         }}
       />
       <TextField
+        {...toField}
         type="number"
-        name="to"
-        value={to}
-        onChange={(e) => handleChange(e, 'to')}
+        value={toField.value || ''}
+        onChange={e => setFieldValue(toName, e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start" sx={adormentStyles}>

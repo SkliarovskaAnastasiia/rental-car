@@ -1,21 +1,25 @@
 import { palette } from '../../theme/palette';
 import { ArrowDownIcon } from '@assets';
 import { FormControl, MenuItem, Select } from '@mui/material';
+import { useField } from 'formik';
 
-export const CustomSelect = ({ brands, value, onChange, placeholder, sx }) => {
-  const handleChange = (e) => {
-    onChange(e.target.value);
+export const CustomSelect = ({ name, data, placeholder, sx }) => {
+  const [field, meta, helpers] = useField(name);
+
+  const handleChange = e => {
+    helpers.setValue(e.target.value);
   };
 
   return (
     <FormControl>
       <Select
-        value={value}
+        {...field}
         onChange={handleChange}
+        name={name}
         IconComponent={ArrowDownIcon}
         displayEmpty
-        renderValue={(selected) => {
-          if (selected.length === 0) {
+        renderValue={selected => {
+          if (selected?.length === 0) {
             return (
               <em
                 style={{
@@ -31,9 +35,8 @@ export const CustomSelect = ({ brands, value, onChange, placeholder, sx }) => {
           return selected;
         }}
         sx={{
-          fontFamily: 'inherit',
-          fontWeight: 500,
           fontSize: '16px',
+          fontWeight: 500,
           lineHeight: '1.25',
           color: palette.black.main,
           borderRadius: '12px',
@@ -57,11 +60,9 @@ export const CustomSelect = ({ brands, value, onChange, placeholder, sx }) => {
               border: `1px solid ${palette.white[100]}`,
               borderRadius: '12px',
               width: '204px',
-              height: '272px',
-              top: '124px !important',
+              top: '208px !important',
 
               '& .MuiMenuItem-root': {
-                fontFamily: 'inherit',
                 fontSize: '16px',
                 fontWeight: 500,
                 lineHeight: '1.25',
@@ -80,16 +81,19 @@ export const CustomSelect = ({ brands, value, onChange, placeholder, sx }) => {
                 },
               },
             },
-            style: { top: '124px' },
           },
         }}
       >
-        {brands?.map((brand) => (
-          <MenuItem key={brand} value={brand}>
-            {brand}
+        {data?.map(item => (
+          <MenuItem key={item} value={item}>
+            {item}
           </MenuItem>
         ))}
       </Select>
+
+      {meta.touched && meta.error && (
+        <FormHelperText>{meta.error}</FormHelperText>
+      )}
     </FormControl>
   );
 };
