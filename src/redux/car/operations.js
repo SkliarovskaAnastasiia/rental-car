@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
 
-export const getAllCars = createAsyncThunk(
-  'cars/getAllCars',
-  async (params, thunkAPI) => {
+export const getCarById = createAsyncThunk(
+  'oneCar/getCarById',
+  async (id, thunkAPI) => {
     try {
-      const response = await api.get('/cars', { params });
+      const response = await api.get(`/cars/${id}`);
       return response.data;
     } catch (error) {
       thunkAPI.rejectWithValue(error);

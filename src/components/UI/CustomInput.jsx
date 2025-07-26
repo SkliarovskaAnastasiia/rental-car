@@ -1,31 +1,34 @@
 import { TextField } from '@mui/material';
 import { palette } from '../../theme/palette';
+import { useField } from 'formik';
 
 export const CustomInput = ({
   placeholder,
-  value,
-  onChange,
   type,
   name,
   sx,
+  InputProps,
+  ...props
 }) => {
-  const handleChange = (e) => {
-    onChange(e.target.value.trim());
-  };
+  const [field, meta] = useField(name);
+
   return (
     <TextField
-      value={value}
-      onChange={handleChange}
+      {...field}
       placeholder={placeholder}
       type={type}
       name={name}
+      error={Boolean(meta.touched && meta.error)}
+      helperText={meta.touched && meta.error}
+      autoComplete="off"
+      InputProps={InputProps}
+      {...props}
       sx={{
         width: '100%',
 
         '& .MuiInputBase-root': {
           backgroundColor: palette.white[100],
           borderRadius: '12px',
-          fontFamily: 'inherit',
         },
         '& .MuiInputBase-input': {
           padding: '12px 20px',

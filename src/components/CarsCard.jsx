@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { selectFavorites } from '../redux/favorites/selectors';
 import { SavedIcon, UnsavedIcon } from '@assets';
 import { addToFavorites, deleteFromFavorites } from '../redux/favorites/slice';
+import { formatMileage } from '../utils/formatMileage';
 
 export const CarsCard = ({ car }) => {
   const {
@@ -91,7 +92,7 @@ export const CarsCard = ({ car }) => {
         }}
       >
         <Typography sx={{ ...textStyles }}>
-          {brand}{' '}
+          {brand}
           <Typography
             component="span"
             sx={{ color: palette.blue.main }}
@@ -117,10 +118,10 @@ export const CarsCard = ({ car }) => {
         <Typography
           sx={{ ...subTextStyles, ...afterElem, textTransform: 'capitalize' }}
         >
-          {type}
+          {type.toLowerCase()}
         </Typography>
         <Typography sx={{ ...subTextStyles }}>{`${String(
-          mileage
+          formatMileage(mileage)
         ).toLocaleString('uk-UA')} km`}</Typography>
       </Box>
 

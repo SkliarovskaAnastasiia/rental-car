@@ -7,16 +7,20 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App.jsx';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme/theme.js';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<b>Loading...</b>} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <App />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <App />
+            </LocalizationProvider>
           </ThemeProvider>
         </BrowserRouter>
       </PersistGate>

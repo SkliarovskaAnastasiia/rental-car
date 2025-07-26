@@ -3,7 +3,13 @@ import { ArrowDownIcon } from '@assets';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useField } from 'formik';
 
-export const CustomSelect = ({ name, data, placeholder, sx }) => {
+export const CustomSelect = ({
+  name,
+  data,
+  placeholder,
+  sx,
+  isPrice = false,
+}) => {
   const [field, meta, helpers] = useField(name);
 
   const handleChange = e => {
@@ -24,7 +30,6 @@ export const CustomSelect = ({ name, data, placeholder, sx }) => {
               <em
                 style={{
                   fontStyle: 'normal',
-                  marginRight: '32px',
                 }}
               >
                 {placeholder}
@@ -32,7 +37,7 @@ export const CustomSelect = ({ name, data, placeholder, sx }) => {
             );
           }
 
-          return selected;
+          return isPrice ? `To $${selected}` : selected;
         }}
         sx={{
           fontSize: '16px',
@@ -41,8 +46,10 @@ export const CustomSelect = ({ name, data, placeholder, sx }) => {
           color: palette.black.main,
           borderRadius: '12px',
           backgroundColor: palette.white[100],
+          width: '204px',
+          height: '44px',
 
-          '& .MuiSelect-select': { padding: '12px 16px' },
+          '& .MuiSelect-select': { padding: '12px 32px 12px 16px' },
           '& .MuiOutlinedInput-notchedOutline': {
             border: 'none',
           },
@@ -60,7 +67,7 @@ export const CustomSelect = ({ name, data, placeholder, sx }) => {
               border: `1px solid ${palette.white[100]}`,
               borderRadius: '12px',
               width: '204px',
-              top: '208px !important',
+              top: '232px !important',
 
               '& .MuiMenuItem-root': {
                 fontSize: '16px',
@@ -74,6 +81,9 @@ export const CustomSelect = ({ name, data, placeholder, sx }) => {
                 '&:focus': {
                   backgroundColor: 'transparent',
                 },
+                '&:active': {
+                  backgroundColor: 'transparent',
+                },
 
                 '&.Mui-selected': {
                   backgroundColor: 'transparent',
@@ -85,7 +95,15 @@ export const CustomSelect = ({ name, data, placeholder, sx }) => {
         }}
       >
         {data?.map(item => (
-          <MenuItem key={item} value={item}>
+          <MenuItem
+            key={item}
+            value={item}
+            onClick={() => {
+              if (item === field.value) {
+                helpers.setValue('');
+              }
+            }}
+          >
             {item}
           </MenuItem>
         ))}

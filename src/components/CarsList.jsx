@@ -2,12 +2,23 @@ import { useSelector } from 'react-redux';
 import { selectCars } from '../redux/cars/selectors';
 import { List, ListItem } from '@mui/material';
 import { CarsCard } from './CarsCard';
+// import { useRef } from 'react';
 
 export const CarsList = () => {
   const cars = useSelector(selectCars);
-  console.log(cars);
+  // const listRef = useRef(null);
+
+  // setTimeout(() => {
+  //   const firstChild = listRef.current?.children[0];
+  //   if (firstChild) {
+  //     const { height } = firstChild.getBoundingClientRect();
+  //     window.scrollBy({ top: height, behavior: 'smooth' });
+  //   }
+  // }, 100);
+
   return (
     <List
+      // ref={listRef}
       sx={{
         display: 'flex',
         flexWrap: 'wrap',
